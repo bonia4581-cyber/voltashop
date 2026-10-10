@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VoltaShop – Appareils électroniques</title>
+
+  <!-- Bootstrap 5 + icônes + polices -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+
+    :root{
+      --encre:#101827;
+      --papier:#f3f6fb;
+      --corail:#00c2ff;
+      --ciel:#635bff;
+      --menthe:#21d4a4;
+      --sable:#dce7ff;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:90px}
+    body{font-family:'Nunito Sans',sans-serif;color:#182235;background:#f5f7fb}
+    h1,h2,h3,h4,.navbar-brand{font-family:'Sora',sans-serif;letter-spacing:-.035em}
+    ::selection{background:#00c2ff;color:#101827}
+
+    /* Navigation */
+    .navbar{background:rgba(12,19,34,.96);backdrop-filter:blur(14px);padding:.9rem 0;border-bottom:1px solid rgba(255,255,255,.08)}
+    .navbar-brand{font-weight:800;color:#fff!important;font-size:1.45rem}
+    .navbar-brand i{color:var(--corail)}
+    .nav-link{font-weight:600;color:#d5deee!important;padding:.65rem .9rem!important;transition:color .2s}
+    .nav-link:hover,.nav-link:focus{color:var(--corail)!important}
+    .navbar-toggler{border-color:#667085}
+    .navbar-toggler-icon{filter:invert(1)}
+
+    /* Boutons */
+    .btn-corail{background:linear-gradient(135deg,#00c2ff,#635bff);color:#fff;border:0;font-weight:800;border-radius:12px;padding:.85rem 1.5rem;box-shadow:0 8px 22px rgba(52,104,255,.22);transition:transform .2s,box-shadow .2s}
+    .btn-corail:hover{background:linear-gradient(135deg,#39d2ff,#7770ff);color:#fff;transform:translateY(-2px);box-shadow:0 12px 26px rgba(52,104,255,.3)}
+    .btn-contour{border:1px solid #a9b6ca;color:#172238;background:#fff;font-weight:800;border-radius:12px;padding:.8rem 1.5rem;transition:all .2s}
+    .btn-contour:hover{background:#101827;color:#fff;border-color:#101827}
+
+    /* Hero */
+    .hero{background:linear-gradient(90deg,rgba(7,13,25,.97) 0%,rgba(10,20,39,.91) 48%,rgba(10,20,39,.64) 100%),url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=2000&q=85') center/cover no-repeat;color:#fff;padding:9rem 0 6rem;overflow:hidden;position:relative}
+    .hero::before{content:"";position:absolute;width:420px;height:420px;border:1px solid rgba(0,194,255,.15);border-radius:50%;right:-120px;top:-180px;box-shadow:0 0 0 45px rgba(0,194,255,.025),0 0 0 90px rgba(0,194,255,.02)}
+    .hero h1{font-weight:800;font-size:clamp(2.4rem,5vw,4.25rem);line-height:1.08;max-width:680px}
+    .hero p.lead{max-width:34rem;color:#c3cfe1;line-height:1.8}
+    .hero-visuel{position:relative;max-width:520px;margin:auto}
+    .hero-visuel::after{content:"";position:absolute;inset:12% -3% -3% 12%;border:1px solid rgba(0,194,255,.4);border-radius:28px;z-index:0}
+    .hero-visuel img{position:relative;z-index:1}
+    .hero-visuel svg{width:100%;height:auto;filter:drop-shadow(0 25px 35px rgba(0,0,0,.35))}
+    .pastille{position:absolute;z-index:2;background:#fff;color:#172238;border:1px solid #e4eaf4;border-radius:12px;padding:.7rem 1rem;font-weight:800;font-size:.88rem;box-shadow:0 14px 35px rgba(0,0,0,.2)}
+    .pastille i{color:#0aa982}
+    .p1{top:8%;left:-4%}.p2{bottom:10%;right:-2%}
+
+    /* Atouts */
+    .atouts i{font-size:1.8rem;color:#635bff}
+    .atouts p{color:#28364d}
+    .border-bottom{border-color:#e3e9f2!important;background:#fff}
+
+    /* Catégories / produits */
+    .section{padding:5.5rem 0}
+    .section h2{font-weight:800;font-size:clamp(1.9rem,3vw,2.65rem)}
+    .section .text-center>p{font-size:1.05rem}
+    .carte{border:1px solid #e7ecf4;border-radius:20px;overflow:hidden;background:#fff;box-shadow:0 8px 24px rgba(17,31,54,.055);transition:transform .25s,box-shadow .25s,border-color .25s}
+    .carte:hover{transform:translateY(-7px);box-shadow:0 20px 42px rgba(17,31,54,.13);border-color:#c9d8ff}
+    .carte .visuel{height:230px;overflow:hidden;position:relative}
+    .carte .visuel::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(12,19,34,.12),transparent 55%);pointer-events:none}
+    .carte .visuel img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+    .carte:hover .visuel img{transform:scale(1.07)}
+    .photo-hero{width:100%;height:440px;object-fit:cover;border-radius:22px;box-shadow:0 28px 60px rgba(0,0,0,.3)}
+    .v1{background:linear-gradient(135deg,#1d4ed8,#60a5fa)}
+    .v2{background:linear-gradient(135deg,#111827,#475569)}
+    .v3{background:linear-gradient(135deg,#6d28d9,#a78bfa)}
+    .v4{background:linear-gradient(135deg,#0f766e,#5eead4)}
+    .v5{background:linear-gradient(135deg,#4338ca,#a5b4fc)}
+    .v6{background:linear-gradient(135deg,#0369a1,#7dd3fc)}
+    .prix{font-family:'Sora',sans-serif;font-weight:800;font-size:1.08rem;color:#172238}
+    .badge-promo{position:absolute;z-index:2;top:14px;left:14px;background:#101827;color:#fff;font-weight:800;border-radius:7px;padding:.35rem .7rem;font-size:.76rem;letter-spacing:.03em}
+    .carte .p-4{padding:1.5rem!important}
+    .carte h3{font-weight:800}
+    .carte p{line-height:1.65;min-height:52px}
+
+    /* Promotion */
+    .promo{background:radial-gradient(circle at 90% 10%,rgba(0,194,255,.35),transparent 28%),linear-gradient(120deg,#0b1220,#202d4a);color:#fff;border-radius:24px;padding:4rem 3rem;position:relative;overflow:hidden;box-shadow:0 20px 45px rgba(15,28,50,.16)}
+    .promo::after{content:"";position:absolute;right:-70px;bottom:-140px;width:300px;height:300px;border-radius:50%;border:1px solid rgba(0,194,255,.35);box-shadow:0 0 0 35px rgba(0,194,255,.05),0 0 0 70px rgba(0,194,255,.04)}
+    .promo>*{position:relative;z-index:1}
+    .promo h2{max-width:700px;font-size:clamp(1.8rem,3.2vw,2.7rem)}
+
+    /* Avis */
+    .avis{background:#fff;border:1px solid #e5ebf4;border-radius:18px;padding:1.7rem;height:100%;box-shadow:0 8px 24px rgba(17,31,54,.045)}
+    .etoiles{color:#f5a524}
+    .avis p{color:#526078;line-height:1.75}
+
+    /* Contact + pied */
+    .contact{background:#eaf0f8}
+    .form-control{border-radius:12px;padding:.85rem 1rem;border:1px solid #d2dbea;background:#fff}
+    .form-control:focus{border-color:#635bff;box-shadow:0 0 0 .2rem rgba(99,91,255,.12)}
+    footer{background:#0b1220;color:#aebbd0;border-top:1px solid rgba(255,255,255,.07)}
+    footer a{color:#d5deee;text-decoration:none;transition:color .2s}
+    footer a:hover{color:var(--corail)}
+    @media(max-width:767.98px){
+      .hero{padding:7.5rem 0 4rem}
+      .hero-visuel{margin-top:1rem}
+      .pastille{font-size:.75rem;padding:.55rem .7rem}
+      .photo-hero{height:320px}
+      .section{padding:4rem 0}
+      .promo{padding:2.5rem 1.5rem}
+      .carte .visuel{height:210px}
+    }
+    @media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+
+  </style>
+</head>
+<body>
+
+<!-- ======= NAVIGATION ======= -->
+<nav class="navbar navbar-expand-lg fixed-top shadow-sm">
+  <div class="container">
+    <a class="navbar-brand" href="#"><i class="bi bi-lightning-charge-fill"></i> VoltaShop</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-label="Ouvrir le menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="menu">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link" href="#produits">Produits</a></li>
+        <li class="nav-item"><a class="nav-link" href="#promo">Promotions</a></li>
+        <li class="nav-item"><a class="nav-link" href="#avis">Avis clients</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+      <a href="#produits" class="btn btn-corail btn-sm"><i class="bi bi-cart3"></i> Voir la boutique</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ======= HERO ======= -->
+<header class="hero">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <h1>Les meilleurs appareils électroniques, au meilleur prix.</h1>
+        <p class="lead mt-3">Téléphones, ordinateurs, audio, montres connectées et plus encore. Produits garantis, livraison rapide et service après-vente à votre écoute.</p>
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <a href="#produits" class="btn btn-corail">Découvrir les produits</a>
+          <a href="#contact" class="btn btn-contour">Nous contacter</a>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="hero-visuel">
+          <img class="photo-hero" src="https://images.unsplash.com/photo-1645158815496-80be0547fa0a?auto=format&fit=crop&w=1000&q=80" alt="Casque audio et ordinateur portable" onerror="this.style.display='none'">
+          <div class="pastille p1"><i class="bi bi-patch-check-fill"></i> Garantie 2 ans</div>
+          <div class="pastille p2"><i class="bi bi-truck"></i> Livraison rapide</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ======= ATOUTS ======= -->
+<section class="py-4 border-bottom">
+  <div class="container">
+    <div class="row text-center g-4 atouts">
+      <div class="col-6 col-md-3"><i class="bi bi-shield-check"></i><p class="fw-bold mb-0 mt-1">Produits garantis</p></div>
+      <div class="col-6 col-md-3"><i class="bi bi-truck"></i><p class="fw-bold mb-0 mt-1">Livraison à domicile</p></div>
+      <div class="col-6 col-md-3"><i class="bi bi-credit-card-2-front"></i><p class="fw-bold mb-0 mt-1">Paiement sécurisé</p></div>
+      <div class="col-6 col-md-3"><i class="bi bi-headset"></i><p class="fw-bold mb-0 mt-1">Support client</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= PRODUITS ======= -->
+<section class="section" id="produits">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2>Nos produits</h2>
+      <p class="text-secondary">Choisissez parmi nos catégories les plus demandées.</p>
+    </div>
+
+    <div class="row g-4">
+      <!-- Pour utiliser vos propres photos : remplacez le src de chaque <img> par votre fichier (ex: images/iphone.jpg) -->
+      <div class="col-md-6 col-lg-4">
+        <div class="carte position-relative h-100">
+          <span class="badge-promo">-15%</span>
+          <div class="visuel v1"><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80" alt="Smartphones" loading="lazy" onerror="this.remove()"></div>
+          <div class="p-4">
+            <h3 class="h5">Smartphones</h3>
+            <p class="text-secondary">Écrans éclatants, appareils photo performants et grande autonomie.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="prix">à partir de 120 000 F</span>
+              <a href="#contact" class="btn btn-corail btn-sm">Commander</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="carte h-100">
+          <div class="visuel v2"><img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80" alt="Ordinateurs portables" loading="lazy" onerror="this.remove()"></div>
+          <div class="p-4">
+            <h3 class="h5">Ordinateurs portables</h3>
+            <p class="text-secondary">Pour le travail, les études ou le jeu : puissance et légèreté.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="prix">à partir de 250 000 F</span>
+              <a href="#contact" class="btn btn-corail btn-sm">Commander</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="carte position-relative h-100">
+          <span class="badge-promo">Nouveau</span>
+          <div class="visuel v3"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80" alt="Casques et écouteurs" loading="lazy" onerror="this.remove()"></div>
+          <div class="p-4">
+            <h3 class="h5">Casques et écouteurs</h3>
+            <p class="text-secondary">Un son clair, avec ou sans fil, réduction de bruit disponible.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="prix">à partir de 15 000 F</span>
+              <a href="#contact" class="btn btn-corail btn-sm">Commander</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="carte h-100">
+          <div class="visuel v4"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80" alt="Montres connectées" loading="lazy" onerror="this.remove()"></div>
+          <div class="p-4">
+            <h3 class="h5">Montres connectées</h3>
+            <p class="text-secondary">Suivi sportif, notifications et santé à votre poignet.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="prix">à partir de 30 000 F</span>
+              <a href="#contact" class="btn btn-corail btn-sm">Commander</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="carte position-relative h-100">
+          <span class="badge-promo">-10%</span>
+          <div class="visuel v5"><img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=800&q=80" alt="Téléviseurs" loading="lazy" onerror="this.remove()"></div>
+          <div class="p-4">
+            <h3 class="h5">Téléviseurs</h3>
+            <p class="text-secondary">Images 4K et Smart TV pour profiter de vos films et séries.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="prix">à partir de 140 000 F</span>
+              <a href="#contact" class="btn btn-corail btn-sm">Commander</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="carte h-100">
+          <div class="visuel v6"><img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80" alt="Appareils photo" loading="lazy" onerror="this.remove()"></div>
+          <div class="p-4">
+            <h3 class="h5">Appareils photo</h3>
+            <p class="text-secondary">Capturez vos meilleurs moments avec une qualité professionnelle.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="prix">à partir de 95 000 F</span>
+              <a href="#contact" class="btn btn-corail btn-sm">Commander</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="carte h-100">
+          <div class="visuel v2"><img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=800&q=80" alt="Enceinte Bluetooth" loading="lazy" onerror="this.remove()"></div>
+          <div class="p-4">
+            <h3 class="h5">Enceintes Bluetooth</h3>
+            <p class="text-secondary">Des enceintes portables pour écouter votre musique à la maison ou en déplacement.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="prix">Nous consulter</span>
+              <a href="#contact" class="btn btn-corail btn-sm">Commander</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="carte h-100">
+          <div class="visuel v1"><img src="https://images.unsplash.com/photo-1550009158-9ebf69173e03?auto=format&fit=crop&w=800&q=80" alt="Accessoires informatiques et électroniques" loading="lazy" onerror="this.remove()"></div>
+          <div class="p-4">
+            <h3 class="h5">Accessoires informatiques</h3>
+            <p class="text-secondary">Claviers, souris, hubs USB et accessoires utiles pour votre installation.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="prix">Nous consulter</span>
+              <a href="#contact" class="btn btn-corail btn-sm">Commander</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="carte h-100">
+          <div class="visuel v3" role="img" aria-label="Chargeurs secteur et câbles USB-C"><svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="chargeBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e9e7ff"/><stop offset="1" stop-color="#c8d9ff"/></linearGradient><linearGradient id="chargeBody" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#d8deea"/></linearGradient><filter id="chargeShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="16" stdDeviation="15" flood-color="#24335c" flood-opacity=".22"/></filter></defs><rect width="800" height="500" fill="url(#chargeBg)"/><circle cx="660" cy="95" r="120" fill="#fff" opacity=".25"/><circle cx="130" cy="420" r="160" fill="#fff" opacity=".22"/><g filter="url(#chargeShadow)" transform="translate(190 75) rotate(-8 150 160)"><rect x="65" y="45" width="205" height="255" rx="38" fill="url(#chargeBody)" stroke="#c2cada" stroke-width="4"/><rect x="125" y="20" width="18" height="45" rx="6" fill="#929db2"/><rect x="190" y="20" width="18" height="45" rx="6" fill="#929db2"/><rect x="117" y="118" width="100" height="64" rx="18" fill="#263451"/><rect x="142" y="137" width="50" height="26" rx="8" fill="#58b9ff"/><circle cx="167" cy="225" r="9" fill="#aab4c6"/></g><g filter="url(#chargeShadow)" transform="translate(430 130) rotate(9 110 120)"><rect x="25" y="30" width="155" height="210" rx="30" fill="#30394d"/><rect x="43" y="49" width="119" height="172" rx="22" fill="#414d64"/><rect x="77" y="14" width="14" height="29" rx="4" fill="#aab4c6"/><rect x="111" y="14" width="14" height="29" rx="4" fill="#aab4c6"/><rect x="70" y="90" width="65" height="42" rx="12" fill="#141c2b"/><rect x="88" y="103" width="29" height="16" rx="5" fill="#5ed2ff"/></g><path d="M505 360 C620 360 640 425 540 438 S380 430 410 360 S520 300 610 330" fill="none" stroke="#fff" stroke-width="19" stroke-linecap="round"/><path d="M505 360 C620 360 640 425 540 438 S380 430 410 360 S520 300 610 330" fill="none" stroke="#aab7d1" stroke-width="3" stroke-linecap="round"/><rect x="600" y="313" width="48" height="30" rx="9" fill="#f8fafc" stroke="#aab7d1" stroke-width="4" transform="rotate(18 624 328)"/><rect x="593" y="321" width="15" height="14" rx="3" fill="#64748b" transform="rotate(18 600 328)"/><path d="M145 285 C90 310 100 375 175 380 S290 350 270 310" fill="none" stroke="#fff" stroke-width="16" stroke-linecap="round"/><path d="M145 285 C90 310 100 375 175 380 S290 350 270 310" fill="none" stroke="#aab7d1" stroke-width="3" stroke-linecap="round"/><rect x="253" y="293" width="42" height="25" rx="7" fill="#f8fafc" stroke="#aab7d1" stroke-width="3" transform="rotate(24 274 305)"/><rect x="264" y="300" width="11" height="10" rx="2" fill="#64748b" transform="rotate(24 269 305)"/><text x="400" y="475" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" font-weight="700" fill="#263451">CHARGEURS • CÂBLES USB-C</text></svg></div>
+          <div class="p-4">
+            <h3 class="h5">Chargeurs et câbles</h3>
+            <p class="text-secondary">Chargeurs secteur, câbles USB et solutions de recharge pour vos appareils.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="prix">Nous consulter</span>
+              <a href="#contact" class="btn btn-corail btn-sm">Commander</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="carte h-100">
+          <div class="visuel v4"><img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=800&q=80" alt="Tablettes électroniques" loading="lazy" onerror="this.remove()"></div>
+          <div class="p-4">
+            <h3 class="h5">Tablettes</h3>
+            <p class="text-secondary">Des écrans pratiques pour les études, le travail et les loisirs numériques.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="prix">Nous consulter</span>
+              <a href="#contact" class="btn btn-corail btn-sm">Commander</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="carte h-100">
+          <div class="visuel v5"><img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=800&q=80" alt="Imprimante de bureau" loading="lazy" onerror="this.remove()"></div>
+          <div class="p-4">
+            <h3 class="h5">Imprimantes et scanners</h3>
+            <p class="text-secondary">Des équipements utiles pour les bureaux, les commerces et les étudiants.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="prix">Nous consulter</span>
+              <a href="#contact" class="btn btn-corail btn-sm">Commander</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="carte h-100">
+          <div class="visuel v6"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80" alt="Batterie externe" loading="lazy" onerror="this.remove()"></div>
+          <div class="p-4">
+            <h3 class="h5">Batteries externes</h3>
+            <p class="text-secondary">Gardez vos smartphones et appareils compatibles chargés pendant vos déplacements.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="prix">Nous consulter</span>
+              <a href="#contact" class="btn btn-corail btn-sm">Commander</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= PROMOTION ======= -->
+<section class="pb-5" id="promo">
+  <div class="container">
+    <div class="promo">
+      <div class="row align-items-center">
+        <div class="col-lg-8">
+          <h2 class="fw-bold">Offre du mois : jusqu'à -20% sur les packs</h2>
+          <p class="mb-4">Achetez un ordinateur et un casque ensemble, et économisez. Offre valable jusqu'à épuisement du stock.</p>
+          <a href="#contact" class="btn btn-corail">Profiter de l'offre</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= AVIS ======= -->
+<section class="section" id="avis">
+  <div class="container">
+    <h2 class="text-center mb-5">Ce que disent nos clients</h2>
+    <div class="row g-4">
+      <div class="col-md-4"><div class="avis">
+        <div class="etoiles mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+        <p>Livraison rapide et téléphone conforme à la description. Je recommande.</p><strong>Aïcha D.</strong>
+      </div></div>
+      <div class="col-md-4"><div class="avis">
+        <div class="etoiles mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+        <p>Très bon prix pour mon ordinateur, et l'équipe m'a bien conseillé.</p><strong>Koffi M.</strong>
+      </div></div>
+      <div class="col-md-4"><div class="avis">
+        <div class="etoiles mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></div>
+        <p>Service après-vente réactif : mon casque a été remplacé en deux jours.</p><strong>Sènami A.</strong>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= CONTACT ======= -->
+<section class="section contact" id="contact">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-5">
+        <h2>Une question ? Une commande ?</h2>
+        <p class="text-secondary">Écrivez-nous, nous répondons en moins de 24 heures.</p>
+        <p class="mb-2"><i class="bi bi-geo-alt-fill text-danger"></i> Votre adresse, Ville, Pays</p>
+        <p class="mb-2"><i class="bi bi-telephone-fill text-danger"></i> +229 69 93 05 37 ou +229 49 23 30 62</p>
+        <p><i class="bi bi-envelope-fill text-danger"></i> contact@voltashop.com</p>
+      </div>
+      <div class="col-lg-7">
+        <form onsubmit="event.preventDefault();alert('Merci ! Votre message a bien été envoyé.');this.reset();">
+          <div class="row g-3">
+            <div class="col-md-6"><input class="form-control" placeholder="Votre nom" required></div>
+            <div class="col-md-6"><input type="email" class="form-control" placeholder="Votre e-mail" required></div>
+            <div class="col-12"><input class="form-control" placeholder="Produit souhaité"></div>
+            <div class="col-12"><textarea class="form-control" rows="4" placeholder="Votre message" required></textarea></div>
+            <div class="col-12"><button class="btn btn-corail" type="submit">Envoyer le message</button></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= PIED DE PAGE ======= -->
+<footer class="py-4">
+  <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
+    <span><i class="bi bi-lightning-charge-fill text-warning"></i> <strong>VoltaShop</strong> © 2026. Tous droits réservés.</span>
+    <span class="fs-5"><a href="#"><i class="bi bi-facebook"></i></a> &nbsp; <a href="#"><i class="bi bi-instagram"></i></a> &nbsp; <a href="#"><i class="bi bi-whatsapp"></i></a></span>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
